@@ -1,26 +1,26 @@
 import json
 
-"""
-change the filename to modify different json files
-have already modified the relative path in train.json, val.json and test.json
-this is the pathname changing script
-the new files and this script will be update on GitHub
-"""
-# Read the JSON file
-with open("val.json", "r") as file:
-    data = json.load(file)
+# List of files to process
+file_names = ['test.json', 'train.json', 'val.json']
 
-# Modify the image_path for each entry
-for item in data:
-    # Replace Windows-style backslashes with Linux-style forward slashes
-    item["image_path"] = item["image_path"].replace("\\", "/")
+# Function to replace backslashes and overwrite the file
+def convert_paths_in_file(file_name):
+    with open(file_name, 'r') as file:
+        data = json.load(file)
     
-    # Remove the F:/2024 T3/9444/project/ part of the path, keeping the part starting with 'dataset'
-    item["image_path"] = item["image_path"].split('dataset/', 1)[-1]
-    item["image_path"] = 'dataset/' + item["image_path"]
+    # Replace \\ with /
+    for item in data:
+        item['image_path'] = item['image_path'].replace('\\', '/')
+    
+    # Overwrite the original file
+    with open(file_name, 'w') as outfile:
+        json.dump(data, outfile, indent=4)
+    
+    print(f"File {file_name} has been successfully converted and saved.")
 
-# Write the modified content back to a new file
-with open("val_modified.json", "w") as file:
-    json.dump(data, file, indent=4)
+# Process each file
+for file_name in file_names:
+    convert_paths_in_file(file_name)
 
-print("Paths have been successfully modified and saved as 'val_modified.json'")
+
+
