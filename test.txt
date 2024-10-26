@@ -1,2 +1,14 @@
 test new branch
 2024/10/24
+
+model
+1. tradition ml (basic cv method. why dl? compare)
+2. basic cnn (ask why using? show improvement)
+3. alex resnet (big, more layers)
+
+assign task:
+1.fix dataset
+
+group devide:
+1.four class
+2.tewnty class
